@@ -18,49 +18,11 @@ class Assessment extends StatelessWidget {
     return Scaffold(
       drawer: drawer(context),
       backgroundColor: AppColors.appLightGrey,
-      appBar: renderapplicationBar("Assessment"),
+      appBar: renderapplicationBar("Grades"),
       body: Column(
         children: [
           StudentInfo(
             hasBackIcon: true,
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 3),
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(10)),
-            padding: EdgeInsets.fromLTRB(20, 15, 20, 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                selectTextField(context, "SELECT SESSION"),
-                SizedBox(
-                  height: ConvertToMediaQuery()
-                      .convertHeightToMediaQuery(10, context),
-                ),
-                selectTextField(context, "SELECT TERM"),
-                SizedBox(
-                  height: ConvertToMediaQuery()
-                      .convertHeightToMediaQuery(5, context),
-                ),
-                TextButton(
-                    onPressed: () {
-                      Get.to(() => Login());
-                    },
-                    style: TextButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5)),
-                        backgroundColor: Color(0xFF0081D5),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 0)),
-                    child: Text(
-                      'Apply Filter',
-                      style: textStyleContentSM(context,
-                          color: Colors.white,
-                          fw: FontWeight.w500,
-                          fontSize: 11),
-                    ))
-              ],
-            ),
           ),
           Expanded(
             child: Container(
@@ -108,7 +70,7 @@ class Assessment extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 20),
             child: Text(
-              "CA1",
+              "EXAM",
               style: textStyleContentSM(context,
                   color: AppColors.appLightBlue,
                   fw: FontWeight.w500,
@@ -122,7 +84,7 @@ class Assessment extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 20),
             child: Text(
-              "Subject:",
+              "Subject",
               style: textStyleContentSM(context,
                   color: Color(0xFF535353), fw: FontWeight.w300, fontSize: 12),
             ),
@@ -145,7 +107,7 @@ class Assessment extends StatelessWidget {
                 Expanded(
                   flex: 1,
                   child: Text(
-                    "Due Date:",
+                    "Date Taken",
                     style: textStyleContentSM(context,
                         color: Color(0xFF535353),
                         fw: FontWeight.w300,

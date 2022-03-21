@@ -56,132 +56,24 @@ class Bio extends StatelessWidget {
                         height: ConvertToMediaQuery()
                             .convertHeightToMediaQuery(25, context),
                       ),
-                      Container(
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Text(
-                                "Account Status",
-                                style: textStyleContentSM(context,
-                                    color: Color(0xFF535353),
-                                    fw: FontWeight.w300,
-                                    fontSize: 12),
-                              ),
-                            ),
-                            Expanded(
-                                flex: 1,
-                                child: Text(
-                                  "Admission Number",
-                                  style: textStyleContentSM(context,
-                                      color: Color(0xFF535353),
-                                      fw: FontWeight.w300,
-                                      fontSize: 12),
-                                ))
-                          ],
-                        ),
-                      ),
-                      Container(
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Text(
-                                "Active",
-                                style: textStyleContentSM(context,
-                                    color: Color(0xFF01A03A),
-                                    fw: FontWeight.w400,
-                                    fontSize: 14),
-                              ),
-                            ),
-                            Expanded(
-                                flex: 1,
-                                child: Text(
-                                  "GCCM/468",
-                                  style: textStyleContentSM(context,
-                                      color: Colors.black,
-                                      fw: FontWeight.w400,
-                                      fontSize: 14),
-                                ))
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: ConvertToMediaQuery()
-                            .convertHeightToMediaQuery(25, context),
-                      ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Due Fees",
+                            "Batch",
                             style: textStyleContentSM(context,
                                 color: Color(0xFF535353),
                                 fw: FontWeight.w300,
                                 fontSize: 12),
                           ),
                           Text(
-                            "₦ 12,000.00",
+                            "2022-2027",
                             style: textStyleContentSM(context,
                                 color: Color(0xFFFF0000),
                                 fw: FontWeight.w400,
                                 fontSize: 14),
                           ),
                         ],
-                      ),
-                      SizedBox(
-                        height: ConvertToMediaQuery()
-                            .convertHeightToMediaQuery(25, context),
-                      ),
-                      Container(
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Text(
-                                "Gender",
-                                style: textStyleContentSM(context,
-                                    color: Color(0xFF535353),
-                                    fw: FontWeight.w300,
-                                    fontSize: 12),
-                              ),
-                            ),
-                            Expanded(
-                                flex: 1,
-                                child: Text(
-                                  "Age",
-                                  style: textStyleContentSM(context,
-                                      color: Color(0xFF535353),
-                                      fw: FontWeight.w300,
-                                      fontSize: 12),
-                                ))
-                          ],
-                        ),
-                      ),
-                      Container(
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Text(
-                                "Female",
-                                style: textStyleContentSM(context,
-                                    color: Colors.black,
-                                    fw: FontWeight.w400,
-                                    fontSize: 14),
-                              ),
-                            ),
-                            Expanded(
-                                flex: 1,
-                                child: Text(
-                                  "15",
-                                  style: textStyleContentSM(context,
-                                      color: Colors.black,
-                                      fw: FontWeight.w400,
-                                      fontSize: 14),
-                                ))
-                          ],
-                        ),
                       ),
                     ],
                   ),
@@ -271,35 +163,6 @@ class Bio extends StatelessWidget {
                             Expanded(
                               flex: 1,
                               child: Text(
-                                "Others Name",
-                                style: textStyleContentSM(context,
-                                    color: Color(0xFF535353),
-                                    fw: FontWeight.w300,
-                                    fontSize: 12),
-                              ),
-                            ),
-                            Expanded(
-                                flex: 1,
-                                child: Text(
-                                  "Adah",
-                                  style: textStyleContentSM(context,
-                                      color: Colors.black,
-                                      fw: FontWeight.w400,
-                                      fontSize: 14),
-                                ))
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: ConvertToMediaQuery()
-                            .convertHeightToMediaQuery(15, context),
-                      ),
-                      Container(
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Text(
                                 "Date of Birth",
                                 style: textStyleContentSM(context,
                                     color: Color(0xFF535353),
@@ -349,36 +212,6 @@ class Bio extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: ConvertToMediaQuery()
-                            .convertHeightToMediaQuery(15, context),
-                      ),
-                      Container(
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Text(
-                                "Blood Group",
-                                style: textStyleContentSM(context,
-                                    color: Color(0xFF535353),
-                                    fw: FontWeight.w300,
-                                    fontSize: 12),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Text(
-                                "O+",
-                                style: textStyleContentSM(context,
-                                    color: Colors.black,
-                                    fw: FontWeight.w400,
-                                    fontSize: 14),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -393,11 +226,40 @@ class Bio extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "CONTACT INFO",
+                        "PARENT INFO",
                         style: textStyleContentSM(context,
                             color: Colors.black,
                             fw: FontWeight.w400,
                             fontSize: 14),
+                      ),
+                      SizedBox(
+                        height: ConvertToMediaQuery()
+                            .convertHeightToMediaQuery(25, context),
+                      ),
+                      Container(
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: Text(
+                                "Name",
+                                style: textStyleContentSM(context,
+                                    color: Color(0xFF535353),
+                                    fw: FontWeight.w300,
+                                    fontSize: 12),
+                              ),
+                            ),
+                            Expanded(
+                                flex: 1,
+                                child: Text(
+                                  "Odenigbo Veronica",
+                                  style: textStyleContentSM(context,
+                                      color: Colors.black,
+                                      fw: FontWeight.w400,
+                                      fontSize: 14),
+                                ))
+                          ],
+                        ),
                       ),
                       SizedBox(
                         height: ConvertToMediaQuery()

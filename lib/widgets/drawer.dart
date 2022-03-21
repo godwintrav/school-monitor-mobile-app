@@ -70,7 +70,7 @@ Widget drawer(BuildContext context) {
                   ),
                 ),
               ),
-              renderDrawerItem(context, Icons.lock, "Change Password"),
+              // renderDrawerItem(context, Icons.lock, "Change Password"),
               renderDrawerItem(context, Icons.check_box, "Terms of Use"),
               renderDrawerItem(context, Icons.person, "Privacy Policy"),
               renderDrawerItem(context, Icons.help, "Help"),

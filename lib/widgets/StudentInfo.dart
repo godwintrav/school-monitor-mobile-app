@@ -72,7 +72,7 @@ class StudentInfo extends StatelessWidget {
                         .convertHeightToMediaQuery(90, context),
                   ),
                   Text(
-                    "Session:",
+                    "Gender",
                     style: textStyleTitleSM(context,
                         fw: FontWeight.w400, fontSize: 10),
                   ),
@@ -87,7 +87,7 @@ class StudentInfo extends StatelessWidget {
                     width: ConvertToMediaQuery()
                         .convertHeightToMediaQuery(80, context),
                   ),
-                  Text(currentSession,
+                  Text("Male",
                       style: textStyleContentSM(context,
                           fw: FontWeight.w500, fontSize: 12)),
                 ],

@@ -39,14 +39,14 @@ class Home extends StatelessWidget {
                     title: "Bio",
                     route: Bio(),
                   ),
-                  CustomListTile(
-                    icon: Icons.receipt,
-                    title: "Fees",
-                    route: FeesPage(),
-                  ),
+                  // CustomListTile(
+                  //   icon: Icons.receipt,
+                  //   title: "Fees",
+                  //   route: FeesPage(),
+                  // ),
                   CustomListTile(
                     icon: Icons.account_circle,
-                    title: "Guardians",
+                    title: "Teachers",
                     route: Guardians(),
                   ),
                   CustomListTile(
@@ -59,16 +59,16 @@ class Home extends StatelessWidget {
                     title: "Attendance",
                     route: Attendance(),
                   ),
-                  CustomListTile(
-                    icon: Icons.assignment_ind_rounded,
-                    title: "Report Cards",
-                    route: ReportCard(),
-                  ),
-                  CustomListTile(
-                    icon: Icons.my_library_books_rounded,
-                    title: "Batch History",
-                    route: BatchHistory(),
-                  ),
+                  // CustomListTile(
+                  //   icon: Icons.assignment_ind_rounded,
+                  //   title: "Report Cards",
+                  //   route: ReportCard(),
+                  // ),
+                  // CustomListTile(
+                  //   icon: Icons.my_library_books_rounded,
+                  //   title: "Batch History",
+                  //   route: BatchHistory(),
+                  // ),
                 ],
               ),
             ),
