@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:skool_trust/controllers/auth_controller.dart';
 import 'package:skool_trust/utils/appColors.dart';
 import 'package:skool_trust/utils/convert_mediaQuery.dart';
 import 'package:skool_trust/views/home/home.dart';
 
 class Login extends StatefulWidget {
-  const Login({Key key}) : super(key: key);
-
   @override
   _LoginState createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
+  final AuthController authController = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +35,7 @@ class _LoginState extends State<Login> {
                     width: ConvertToMediaQuery()
                         .convertWidthToMediaQuery(80, context),
                     child: Image(
-                      image: AssetImage("assets/images/login_image.png"),
+                      image: AssetImage("assets/images/logo.png"),
                     ),
                   ),
                   Container(
@@ -43,7 +43,7 @@ class _LoginState extends State<Login> {
                     child: new Column(
                       children: <Widget>[
                         Text(
-                          'ECWA SECONDARY SCHOOL MAKURDI',
+                          'SCHOOL MONITOR',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.poppins(
                             color: Colors.black,
@@ -110,6 +110,8 @@ class _LoginState extends State<Login> {
                     height: ConvertToMediaQuery()
                         .convertHeightToMediaQuery(35, context),
                     child: TextField(
+                      style: TextStyle(color: Colors.black),
+                      controller: authController.emailController,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.white,
@@ -169,6 +171,8 @@ class _LoginState extends State<Login> {
                     height: ConvertToMediaQuery()
                         .convertHeightToMediaQuery(35, context),
                     child: TextField(
+                      style: TextStyle(color: Colors.black),
+                      controller: authController.passwordController,
                       obscureText: true,
                       decoration: InputDecoration(
                         filled: true,
@@ -234,26 +238,37 @@ class _LoginState extends State<Login> {
                     height: ConvertToMediaQuery()
                         .convertHeightToMediaQuery(30, context),
                   ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    child: TextButton(
-                        onPressed: () {
-                          Get.to(() => Home());
-                        },
-                        style: TextButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12)),
-                            backgroundColor: Color(0xFF0081D5),
-                            padding: EdgeInsets.symmetric(horizontal: 0)),
-                        child: Text(
-                          'LOGIN',
-                          style: GoogleFonts.poppins(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontSize: ConvertToMediaQuery()
-                                  .convertFontSizeToMediaQuery(12, context)),
-                        )),
-                  ),
+                  Obx(() {
+                    if (authController.isLoading.value)
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    else
+                      return Container(
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        child: TextButton(
+                            onPressed: () async {
+                              var result = await authController.loginUser();
+                              if (result) {
+                                Get.to(() => Home());
+                              }
+                            },
+                            style: TextButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12)),
+                                backgroundColor: Color(0xFF0081D5),
+                                padding: EdgeInsets.symmetric(horizontal: 0)),
+                            child: Text(
+                              'LOGIN',
+                              style: GoogleFonts.poppins(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: ConvertToMediaQuery()
+                                      .convertFontSizeToMediaQuery(
+                                          12, context)),
+                            )),
+                      );
+                  }),
                   SizedBox(
                     height: ConvertToMediaQuery()
                         .convertHeightToMediaQuery(3, context),

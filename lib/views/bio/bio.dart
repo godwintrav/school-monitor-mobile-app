@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:skool_trust/controllers/auth_controller.dart';
 import 'package:skool_trust/utils/appColors.dart';
 import 'package:skool_trust/utils/appStyles.dart';
 import 'package:skool_trust/utils/convert_mediaQuery.dart';
@@ -8,7 +10,7 @@ import 'package:skool_trust/utils/appBar.Dart';
 import 'package:skool_trust/widgets/bottomNavigation.dart';
 
 class Bio extends StatelessWidget {
-  const Bio({Key key}) : super(key: key);
+  final AuthController authController = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,7 @@ class Bio extends StatelessWidget {
                                 fontSize: 14),
                           ),
                           Text(
-                            "09/09/2019",
+                            authController.studentData.value.dateEnrolled,
                             style: textStyleContentSM(context,
                                 color: Colors.black,
                                 fw: FontWeight.w500,
@@ -67,7 +69,7 @@ class Bio extends StatelessWidget {
                                 fontSize: 12),
                           ),
                           Text(
-                            "2022-2027",
+                            authController.studentData.value.batch,
                             style: textStyleContentSM(context,
                                 color: Color(0xFFFF0000),
                                 fw: FontWeight.w400,
@@ -115,7 +117,7 @@ class Bio extends StatelessWidget {
                             Expanded(
                                 flex: 1,
                                 child: Text(
-                                  "Jane",
+                                  authController.studentData.value.firstName,
                                   style: textStyleContentSM(context,
                                       color: Colors.black,
                                       fw: FontWeight.w400,
@@ -144,7 +146,7 @@ class Bio extends StatelessWidget {
                             Expanded(
                                 flex: 1,
                                 child: Text(
-                                  "Ameh",
+                                  authController.studentData.value.lastName,
                                   style: textStyleContentSM(context,
                                       color: Colors.black,
                                       fw: FontWeight.w400,
@@ -173,7 +175,7 @@ class Bio extends StatelessWidget {
                             Expanded(
                                 flex: 1,
                                 child: Text(
-                                  "20/07/2006",
+                                  authController.studentData.value.dob,
                                   style: textStyleContentSM(context,
                                       color: Colors.black,
                                       fw: FontWeight.w400,
@@ -202,7 +204,7 @@ class Bio extends StatelessWidget {
                             Expanded(
                               flex: 1,
                               child: Text(
-                                "Female",
+                                authController.studentData.value.gender,
                                 style: textStyleContentSM(context,
                                     color: Colors.black,
                                     fw: FontWeight.w400,
@@ -252,7 +254,7 @@ class Bio extends StatelessWidget {
                             Expanded(
                                 flex: 1,
                                 child: Text(
-                                  "Odenigbo Veronica",
+                                  authController.studentData.value.parentName,
                                   style: textStyleContentSM(context,
                                       color: Colors.black,
                                       fw: FontWeight.w400,
@@ -281,7 +283,7 @@ class Bio extends StatelessWidget {
                             Expanded(
                                 flex: 1,
                                 child: Text(
-                                  "Nil",
+                                  authController.studentData.value.parentPhone,
                                   style: textStyleContentSM(context,
                                       color: Colors.black,
                                       fw: FontWeight.w400,
@@ -310,7 +312,7 @@ class Bio extends StatelessWidget {
                             Expanded(
                                 flex: 1,
                                 child: Text(
-                                  "Nil",
+                                  authController.studentData.value.email,
                                   style: textStyleContentSM(context,
                                       color: Colors.black,
                                       fw: FontWeight.w400,
@@ -339,7 +341,7 @@ class Bio extends StatelessWidget {
                             Expanded(
                                 flex: 1,
                                 child: Text(
-                                  "North Bank Makurdi, Behind ECWA Church",
+                                  authController.studentData.value.address,
                                   style: textStyleContentSM(context,
                                       color: Colors.black,
                                       fw: FontWeight.w400,

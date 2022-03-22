@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:skool_trust/controllers/auth_controller.dart';
 import 'package:skool_trust/utils/appColors.dart';
 import 'package:skool_trust/utils/appStyles.dart';
 import 'package:skool_trust/utils/convert_mediaQuery.dart';
@@ -7,10 +8,11 @@ import 'package:skool_trust/utils/utils.dart';
 import 'package:skool_trust/views/home/home.dart';
 
 class StudentInfo extends StatelessWidget {
-  StudentInfo({this.hasBackIcon});
-  final String currentUserName = AppUtils.currentUserName;
-  final String currentClass = AppUtils.currentClass;
-  final String currentSession = AppUtils.currentSession;
+  final AuthController authController = Get.put(AuthController());
+  StudentInfo({
+    this.hasBackIcon,
+  });
+
   final bool hasBackIcon;
 
   @override
@@ -36,9 +38,12 @@ class StudentInfo extends StatelessWidget {
             radius:
                 ConvertToMediaQuery().convertHeightToMediaQuery(40, context),
             child: ClipOval(
-              child: Image.asset(
-                AppUtils.profileImage,
-                fit: BoxFit.fill,
+              child: Image.network(
+                "https://school-monitor-backend.herokuapp.com/api/student/image/" +
+                    authController.studentData.value.id,
+                fit: BoxFit.cover,
+                width: 90.0,
+                height: 90.0,
               ),
             ),
           ),
@@ -53,7 +58,10 @@ class StudentInfo extends StatelessWidget {
                 style: textStyleTitleSM(context,
                     fontSize: 10, fw: FontWeight.w400),
               ),
-              Text(currentUserName,
+              Text(
+                  authController.studentData.value.firstName +
+                      " " +
+                      authController.studentData.value.lastName,
                   style: textStyleContentSM(context,
                       fontSize: 12, fw: FontWeight.w500)),
               SizedBox(
@@ -80,14 +88,14 @@ class StudentInfo extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Text(currentClass,
+                  Text(authController.studentData.value.batch,
                       style: textStyleContentSM(context,
                           fw: FontWeight.w500, fontSize: 12)),
                   SizedBox(
                     width: ConvertToMediaQuery()
                         .convertHeightToMediaQuery(80, context),
                   ),
-                  Text("Male",
+                  Text(authController.studentData.value.gender,
                       style: textStyleContentSM(context,
                           fw: FontWeight.w500, fontSize: 12)),
                 ],
