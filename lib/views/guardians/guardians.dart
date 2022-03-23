@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:skool_trust/controllers/teacherController.dart';
+import 'package:skool_trust/models/teacher.dart';
 import 'package:skool_trust/utils/appBar.Dart';
 import 'package:skool_trust/utils/appColors.dart';
 import 'package:skool_trust/utils/appStyles.dart';
@@ -11,6 +13,7 @@ import 'package:skool_trust/widgets/bottomNavigation.dart';
 import 'package:skool_trust/widgets/drawer.dart';
 
 class Guardians extends StatelessWidget {
+  final TeacherController teacherController = Get.put(TeacherController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,20 +22,27 @@ class Guardians extends StatelessWidget {
       appBar: renderapplicationBar("Teachers"),
       body: Column(
         children: [
-          Expanded(
-              child: ListView.builder(
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return teacherProfileWidget(context);
-            },
-          )),
+          Expanded(child: Obx(() {
+            if (teacherController.isLoading.value)
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            else
+              return ListView.builder(
+                itemCount: teacherController.teacherList.length,
+                itemBuilder: (context, index) {
+                  return teacherProfileWidget(
+                      context, teacherController.teacherList[index]);
+                },
+              );
+          })),
         ],
       ),
       bottomNavigationBar: bottomNavigationBar(context, 0),
     );
   }
 
-  Container teacherProfileWidget(BuildContext context) {
+  Container teacherProfileWidget(BuildContext context, Teacher teacher) {
     return Container(
       margin: EdgeInsets.only(top: 15, left: 10, right: 5),
       decoration: BoxDecoration(
@@ -54,9 +64,12 @@ class Guardians extends StatelessWidget {
                   radius: ConvertToMediaQuery()
                       .convertHeightToMediaQuery(40, context),
                   child: ClipOval(
-                    child: Image.asset(
-                      AppUtils.profileImage,
-                      fit: BoxFit.fill,
+                    child: Image.network(
+                      "https://school-monitor-backend.herokuapp.com/api/teacher/image/" +
+                          teacher.id,
+                      fit: BoxFit.cover,
+                      width: 90.0,
+                      height: 90.0,
                     ),
                   ),
                 ),
@@ -80,7 +93,7 @@ class Guardians extends StatelessWidget {
                       Expanded(
                           flex: 1,
                           child: Text(
-                            "Ameh James Oche",
+                            teacher.name ?? '',
                             style: textStyleContentSM(context,
                                 color: Colors.black,
                                 fw: FontWeight.w400,
@@ -105,7 +118,7 @@ class Guardians extends StatelessWidget {
                       Expanded(
                           flex: 1,
                           child: Text(
-                            "Science Teacher",
+                            teacher.position ?? '',
                             style: textStyleContentSM(context,
                                 color: Colors.black,
                                 fw: FontWeight.w400,
@@ -130,7 +143,7 @@ class Guardians extends StatelessWidget {
                       Expanded(
                           flex: 1,
                           child: Text(
-                            "+2348154637282",
+                            teacher.phone ?? '',
                             style: textStyleContentSM(context,
                                 color: Colors.black,
                                 fw: FontWeight.w400,
@@ -155,7 +168,7 @@ class Guardians extends StatelessWidget {
                       Expanded(
                           flex: 2,
                           child: Text(
-                            "amehoche@gmail.com",
+                            teacher.email ?? '',
                             style: textStyleContentSM(context,
                                 color: Colors.black,
                                 fw: FontWeight.w400,

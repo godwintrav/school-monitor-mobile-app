@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:skool_trust/models/assessment.dart';
 import 'package:skool_trust/models/auth_data.dart';
 import 'package:skool_trust/models/student.dart';
+import 'package:skool_trust/models/teacher.dart';
 
 class RemoteServices {
   static var client = http.Client();
@@ -43,6 +45,41 @@ class RemoteServices {
     if (response.statusCode == 200) {
       var jsonString = response.body;
       return studentFromJson(jsonString);
+    } else {
+      return null;
+    }
+  }
+
+  static Future<List<Teacher>> fetchTeacher(String token) async {
+    Map<String, String> header = {
+      "Authorization": token,
+      "Content-type": "application/json",
+      "Accept": "application/json"
+    };
+    var response = await client.get(
+        "https://school-monitor-backend.herokuapp.com/api/teacher",
+        headers: header);
+    if (response.statusCode == 200) {
+      var jsonString = response.body;
+      return teacherFromJson(jsonString);
+    } else {
+      return null;
+    }
+  }
+
+  static Future<List<Assessment>> fetchAssessment(
+      String token, String id) async {
+    Map<String, String> header = {
+      "Authorization": token,
+      "Content-type": "application/json",
+      "Accept": "application/json"
+    };
+    var response = await client.get(
+        "https://school-monitor-backend.herokuapp.com/api/grade/student/" + id,
+        headers: header);
+    if (response.statusCode == 200) {
+      var jsonString = response.body;
+      return assessmentFromJson(jsonString);
     } else {
       return null;
     }
