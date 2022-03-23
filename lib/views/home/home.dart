@@ -52,7 +52,7 @@ class Home extends StatelessWidget {
                   CustomListTile(
                     icon: Icons.auto_stories,
                     title: "Assesments",
-                    route: Assessment(),
+                    route: AssessmentPage(),
                   ),
                   CustomListTile(
                     icon: Icons.done_all_rounded,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:skool_trust/controllers/assessment_controller.dart';
+import 'package:skool_trust/models/assessment.dart';
 import 'package:skool_trust/utils/appColors.dart';
 import 'package:skool_trust/utils/appStyles.dart';
 import 'package:skool_trust/utils/convert_mediaQuery.dart';
@@ -12,7 +14,9 @@ import 'package:skool_trust/widgets/bottom_sheet_list.dart';
 import 'package:skool_trust/widgets/drawer.dart';
 import 'package:skool_trust/utils/appBar.Dart';
 
-class Assessment extends StatelessWidget {
+class AssessmentPage extends StatelessWidget {
+  final AssessmentController assessmentController =
+      Get.put(AssessmentController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,12 +38,28 @@ class Assessment extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Expanded(
-                      child: ListView.builder(
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return assessmentInfo(context, index);
-                    },
-                  )),
+                    child: Obx(() {
+                      if (assessmentController.isLoading.value) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else {
+                        if (assessmentController.hasError.value)
+                          return Center(
+                            child: Text("Error"),
+                          );
+                        else
+                          return ListView.builder(
+                            itemCount:
+                                assessmentController.assessmentList.length,
+                            itemBuilder: (context, index) {
+                              return assessmentInfo(context, index,
+                                  assessmentController.assessmentList[index]);
+                            },
+                          );
+                      }
+                    }),
+                  ),
 
                   //
                 ],
@@ -52,7 +72,8 @@ class Assessment extends StatelessWidget {
     );
   }
 
-  Widget assessmentInfo(BuildContext context, int index) {
+  Widget assessmentInfo(
+      BuildContext context, int index, Assessment assessment) {
     return Container(
       padding: EdgeInsets.only(left: 0, right: 0, bottom: 15, top: 20),
       child: Column(
@@ -70,7 +91,7 @@ class Assessment extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 20),
             child: Text(
-              "EXAM",
+              assessment.type.toUpperCase(),
               style: textStyleContentSM(context,
                   color: AppColors.appLightBlue,
                   fw: FontWeight.w500,
@@ -84,7 +105,7 @@ class Assessment extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 20),
             child: Text(
-              "Subject",
+              "SUBJECT",
               style: textStyleContentSM(context,
                   color: Color(0xFF535353), fw: FontWeight.w300, fontSize: 12),
             ),
@@ -92,7 +113,7 @@ class Assessment extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 20),
             child: Text(
-              "English Language",
+              assessment.subject.toUpperCase(),
               style: textStyleContentSM(context,
                   color: Colors.black, fw: FontWeight.w400, fontSize: 12),
             ),
@@ -107,7 +128,7 @@ class Assessment extends StatelessWidget {
                 Expanded(
                   flex: 1,
                   child: Text(
-                    "Date Taken",
+                    "DATE TAKEN",
                     style: textStyleContentSM(context,
                         color: Color(0xFF535353),
                         fw: FontWeight.w300,
@@ -117,7 +138,7 @@ class Assessment extends StatelessWidget {
                 Expanded(
                     flex: 1,
                     child: Text(
-                      "Marks Scored",
+                      "MARKS SCORED",
                       style: textStyleContentSM(context,
                           color: Color(0xFF535353),
                           fw: FontWeight.w300,
@@ -133,7 +154,7 @@ class Assessment extends StatelessWidget {
                 Expanded(
                   flex: 1,
                   child: Text(
-                    "20 March, 2021",
+                    assessment.dateTaken.toUpperCase(),
                     style: textStyleContentSM(context,
                         color: Colors.black, fw: FontWeight.w400, fontSize: 12),
                   ),
@@ -141,7 +162,7 @@ class Assessment extends StatelessWidget {
                 Expanded(
                     flex: 1,
                     child: Text(
-                      "08/10",
+                      assessment.marksScored.toUpperCase(),
                       style: textStyleContentSM(context,
                           color: Colors.black,
                           fw: FontWeight.w400,

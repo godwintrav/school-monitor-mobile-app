@@ -25,7 +25,7 @@ class _EventsPageState extends State<EventsPage> {
     return Scaffold(
       drawer: drawer(context),
       backgroundColor: AppColors.appLightGrey,
-      appBar: renderapplicationBar("Assessment"),
+      appBar: renderapplicationBar("Events"),
       body: Column(
         children: [
           StudentInfo(
@@ -44,7 +44,7 @@ class _EventsPageState extends State<EventsPage> {
                       child: ListView.builder(
                     itemCount: 10,
                     itemBuilder: (context, index) {
-                      return assessmentInfo(context, index);
+                      return eventsInfo(context, index);
                     },
                   )),
 
@@ -59,7 +59,7 @@ class _EventsPageState extends State<EventsPage> {
     );
   }
 
-  Widget assessmentInfo(BuildContext context, int index) {
+  Widget eventsInfo(BuildContext context, int index) {
     return Container(
       padding: EdgeInsets.only(left: 0, right: 0, bottom: 15, top: 20),
       child: Column(
