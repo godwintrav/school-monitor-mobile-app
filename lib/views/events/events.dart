@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:skool_trust/controllers/eventsController.dart';
+import 'package:skool_trust/models/events.dart';
 import 'package:skool_trust/utils/appColors.dart';
 import 'package:skool_trust/utils/appStyles.dart';
 import 'package:skool_trust/utils/convert_mediaQuery.dart';
@@ -20,6 +22,7 @@ class EventsPage extends StatefulWidget {
 }
 
 class _EventsPageState extends State<EventsPage> {
+  final EventsController eventsController = Get.put(EventsController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,12 +44,27 @@ class _EventsPageState extends State<EventsPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Expanded(
-                      child: ListView.builder(
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return eventsInfo(context, index);
-                    },
-                  )),
+                    child: Obx(() {
+                      if (eventsController.isLoading.value) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else {
+                        if (eventsController.hasError.value)
+                          return Center(
+                            child: Text("Error"),
+                          );
+                        else
+                          return ListView.builder(
+                            itemCount: eventsController.eventList.length,
+                            itemBuilder: (context, index) {
+                              return eventsInfo(context, index,
+                                  eventsController.eventList[index]);
+                            },
+                          );
+                      }
+                    }),
+                  ),
 
                   //
                 ],
@@ -59,7 +77,7 @@ class _EventsPageState extends State<EventsPage> {
     );
   }
 
-  Widget eventsInfo(BuildContext context, int index) {
+  Widget eventsInfo(BuildContext context, int index, Event event) {
     return Container(
       padding: EdgeInsets.only(left: 0, right: 0, bottom: 15, top: 20),
       child: Column(
@@ -77,7 +95,7 @@ class _EventsPageState extends State<EventsPage> {
           Padding(
             padding: const EdgeInsets.only(left: 20),
             child: Text(
-              "2021/2022 CA TEST",
+              event.name.toUpperCase(),
               style: textStyleContentSM(context,
                   color: AppColors.appLightBlue,
                   fw: FontWeight.w500,
@@ -99,7 +117,7 @@ class _EventsPageState extends State<EventsPage> {
           Padding(
             padding: const EdgeInsets.only(left: 20),
             child: Text(
-              "Upcoming assessment test for 2021/2022 session",
+              event.description,
               style: textStyleContentSM(context,
                   color: Colors.black, fw: FontWeight.w400, fontSize: 12),
             ),
@@ -140,7 +158,7 @@ class _EventsPageState extends State<EventsPage> {
                 Expanded(
                   flex: 1,
                   child: Text(
-                    "20 March, 2021",
+                    event.date,
                     style: textStyleContentSM(context,
                         color: Colors.black, fw: FontWeight.w400, fontSize: 12),
                   ),
