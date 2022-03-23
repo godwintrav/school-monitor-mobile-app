@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:skool_trust/controllers/auth_controller.dart';
 import 'package:skool_trust/utils/appColors.dart';
 import 'package:skool_trust/utils/appString.dart';
 import 'package:skool_trust/utils/appStyles.dart';
@@ -9,6 +10,7 @@ import 'package:skool_trust/utils/utils.dart';
 import 'package:skool_trust/widgets/DrawerItem.dart';
 
 Widget drawer(BuildContext context) {
+  final AuthController authController = Get.put(AuthController());
   String currentTitle = "Fee";
   String currentUserName = AppUtils.currentUserName;
   String currentClass = AppUtils.currentClass;
@@ -34,9 +36,12 @@ Widget drawer(BuildContext context) {
                         backgroundColor: Colors.pink,
                         radius: 40,
                         child: ClipOval(
-                          child: Image.asset(
-                            AppUtils.profileImage,
-                            fit: BoxFit.fill,
+                          child: Image.network(
+                            "https://school-monitor-backend.herokuapp.com/api/student/image/" +
+                                authController.studentData.value.id,
+                            fit: BoxFit.cover,
+                            width: 90.0,
+                            height: 90.0,
                           ),
                         ),
                       ),
@@ -52,13 +57,15 @@ Widget drawer(BuildContext context) {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              currentUserName,
+                              authController.studentData.value.firstName +
+                                  " " +
+                                  authController.studentData.value.lastName,
                               style: textStyleContentSM(context,
                                   fontSize: 14,
                                   fw: FontWeight.w500,
                                   color: Colors.white),
                             ),
-                            Text(currentClass,
+                            Text(authController.studentData.value.gender,
                                 style: textStyleContentSM(context,
                                     fontSize: 14,
                                     fw: FontWeight.w500,

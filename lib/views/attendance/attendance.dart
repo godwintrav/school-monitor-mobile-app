@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:skool_trust/controllers/attendanceController.dart';
 import 'package:skool_trust/utils/appColors.dart';
 import 'package:skool_trust/utils/appStyles.dart';
 import 'package:skool_trust/utils/convert_mediaQuery.dart';
@@ -8,7 +10,8 @@ import 'package:skool_trust/utils/appBar.Dart';
 import 'package:skool_trust/widgets/bottomNavigation.dart';
 
 class Attendance extends StatelessWidget {
-  const Attendance({Key key}) : super(key: key);
+  final AttendanceController attendanceController =
+      Get.put(AttendanceController());
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +65,8 @@ class Attendance extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "68",
+                        attendanceController.attendanceData.value.total
+                            .toString(),
                         style: textStyleTitleSM(
                           context,
                           fontSize: 14,
@@ -104,7 +108,9 @@ class Attendance extends StatelessWidget {
                         ),
                         child: Center(
                           child: Text(
-                            "63",
+                            attendanceController
+                                .attendanceData.value.attended.length
+                                .toString(),
                             style: textStyleBlue(
                               context,
                               fontSize: 14,
@@ -148,7 +154,9 @@ class Attendance extends StatelessWidget {
                         ),
                         child: Center(
                           child: Text(
-                            "5",
+                            attendanceController
+                                .attendanceData.value.absent.length
+                                .toString(),
                             style: textStyleBlue(
                               context,
                               fontSize: 14,

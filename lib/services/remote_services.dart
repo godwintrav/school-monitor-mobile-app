@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:skool_trust/models/assessment.dart';
+import 'package:skool_trust/models/attendance.dart';
 import 'package:skool_trust/models/auth_data.dart';
 import 'package:skool_trust/models/events.dart';
 import 'package:skool_trust/models/student.dart';
@@ -98,6 +99,23 @@ class RemoteServices {
     if (response.statusCode == 200) {
       var jsonString = response.body;
       return eventFromJson(jsonString);
+    } else {
+      return null;
+    }
+  }
+
+  static Future<Attendance> fetchAttendance(String token, String id) async {
+    Map<String, String> header = {
+      "Authorization": token,
+      "Content-type": "application/json",
+      "Accept": "application/json"
+    };
+    var response = await client.get(
+        "https://school-monitor-backend.herokuapp.com/api/attendance/" + id,
+        headers: header);
+    if (response.statusCode == 200) {
+      var jsonString = response.body;
+      return attendanceFromJson(jsonString);
     } else {
       return null;
     }
