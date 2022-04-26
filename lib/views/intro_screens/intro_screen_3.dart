@@ -42,7 +42,7 @@ class IntroScreen3 extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "SkoolComm",
+                        "School Monitor",
                         style: GoogleFonts.poppins(
                             color: Colors.black,
                             fontWeight: FontWeight.w700,

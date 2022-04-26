@@ -65,7 +65,7 @@ class Guardians extends StatelessWidget {
                       .convertHeightToMediaQuery(40, context),
                   child: ClipOval(
                     child: Image.network(
-                      "https://school-monitor-backend.herokuapp.com/api/teacher/image/" +
+                      "http://school-monitor.goveratech.com/api/teacher/image/" +
                           teacher.id,
                       fit: BoxFit.cover,
                       width: 90.0,

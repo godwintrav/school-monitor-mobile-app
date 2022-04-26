@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:skool_trust/controllers/eventsController.dart';
-import 'package:skool_trust/models/events.dart';
 import 'package:skool_trust/utils/appColors.dart';
 import 'package:skool_trust/utils/appStyles.dart';
 import 'package:skool_trust/utils/convert_mediaQuery.dart';
@@ -11,22 +9,19 @@ import 'package:skool_trust/widgets/bottomNavigation.dart';
 import 'package:skool_trust/widgets/bottom_sheet_list.dart';
 import 'package:skool_trust/widgets/drawer.dart';
 import 'package:skool_trust/utils/appBar.Dart';
+import 'package:skool_trust/models/attendance.dart';
 
-class EventsPage extends StatefulWidget {
-  const EventsPage({Key key}) : super(key: key);
+class AbsentPage extends StatelessWidget {
+  final List<Absent> absentList;
 
-  @override
-  State<EventsPage> createState() => _EventsPageState();
-}
+  const AbsentPage({Key key, this.absentList}) : super(key: key);
 
-class _EventsPageState extends State<EventsPage> {
-  final EventsController eventsController = Get.put(EventsController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: drawer(context),
       backgroundColor: AppColors.appLightGrey,
-      appBar: renderapplicationBar("Events"),
+      appBar: renderapplicationBar("ABSENT DAYS"),
       body: Column(
         children: [
           StudentInfo(
@@ -42,26 +37,12 @@ class _EventsPageState extends State<EventsPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Expanded(
-                    child: Obx(() {
-                      if (eventsController.isLoading.value) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      } else {
-                        if (eventsController.hasError.value)
-                          return Center(
-                            child: Text("Error"),
-                          );
-                        else
-                          return ListView.builder(
-                            itemCount: eventsController.eventList.length,
-                            itemBuilder: (context, index) {
-                              return eventsInfo(context, index,
-                                  eventsController.eventList[index]);
-                            },
-                          );
-                      }
-                    }),
+                    child: ListView.builder(
+                      itemCount: absentList.length,
+                      itemBuilder: (context, index) {
+                        return attendedInfo(context, index, absentList[index]);
+                      },
+                    ),
                   ),
 
                   //
@@ -71,11 +52,11 @@ class _EventsPageState extends State<EventsPage> {
           ),
         ],
       ),
-      bottomNavigationBar: bottomNavigationBar(context, 1),
+      bottomNavigationBar: bottomNavigationBar(context, 0),
     );
   }
 
-  Widget eventsInfo(BuildContext context, int index, Event event) {
+  Widget attendedInfo(BuildContext context, int index, Absent absent) {
     return Container(
       padding: EdgeInsets.only(left: 0, right: 0, bottom: 15, top: 20),
       child: Column(
@@ -93,7 +74,7 @@ class _EventsPageState extends State<EventsPage> {
           Padding(
             padding: const EdgeInsets.only(left: 20),
             child: Text(
-              event.name.toUpperCase(),
+              "ABSENT",
               style: textStyleContentSM(context,
                   color: AppColors.appLightBlue,
                   fw: FontWeight.w500,
@@ -107,7 +88,7 @@ class _EventsPageState extends State<EventsPage> {
           Padding(
             padding: const EdgeInsets.only(left: 20),
             child: Text(
-              "Description:",
+              "Date:",
               style: textStyleContentSM(context,
                   color: Color(0xFF535353), fw: FontWeight.w300, fontSize: 12),
             ),
@@ -115,62 +96,9 @@ class _EventsPageState extends State<EventsPage> {
           Padding(
             padding: const EdgeInsets.only(left: 20),
             child: Text(
-              event.description,
+              absent.date,
               style: textStyleContentSM(context,
                   color: Colors.black, fw: FontWeight.w400, fontSize: 12),
-            ),
-          ),
-          SizedBox(
-            height: ConvertToMediaQuery().convertHeightToMediaQuery(5, context),
-          ),
-          Container(
-            padding: const EdgeInsets.only(left: 20),
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Text(
-                    "Date:",
-                    style: textStyleContentSM(context,
-                        color: Color(0xFF535353),
-                        fw: FontWeight.w300,
-                        fontSize: 12),
-                  ),
-                ),
-                Expanded(
-                    flex: 1,
-                    child: Text(
-                      "",
-                      style: textStyleContentSM(context,
-                          color: Color(0xFF535353),
-                          fw: FontWeight.w300,
-                          fontSize: 12),
-                    ))
-              ],
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.only(left: 20),
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Text(
-                    event.date,
-                    style: textStyleContentSM(context,
-                        color: Colors.black, fw: FontWeight.w400, fontSize: 12),
-                  ),
-                ),
-                Expanded(
-                    flex: 1,
-                    child: Text(
-                      "",
-                      style: textStyleContentSM(context,
-                          color: Colors.black,
-                          fw: FontWeight.w400,
-                          fontSize: 12),
-                    ))
-              ],
             ),
           ),
           if (index == 9)

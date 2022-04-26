@@ -39,7 +39,7 @@ class StudentInfo extends StatelessWidget {
                 ConvertToMediaQuery().convertHeightToMediaQuery(40, context),
             child: ClipOval(
               child: Image.network(
-                "https://school-monitor-backend.herokuapp.com/api/student/image/" +
+                "http://school-monitor.goveratech.com/api/student/image/" +
                     authController.studentData.value.id,
                 fit: BoxFit.cover,
                 width: 90.0,

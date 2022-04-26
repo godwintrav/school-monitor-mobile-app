@@ -7,6 +7,8 @@ import 'package:skool_trust/utils/appString.dart';
 import 'package:skool_trust/utils/appStyles.dart';
 import 'package:skool_trust/utils/convert_mediaQuery.dart';
 import 'package:skool_trust/utils/utils.dart';
+import 'package:skool_trust/views/auth_screens/change_password.dart';
+import 'package:skool_trust/views/auth_screens/login.dart';
 import 'package:skool_trust/widgets/DrawerItem.dart';
 
 Widget drawer(BuildContext context) {
@@ -37,7 +39,7 @@ Widget drawer(BuildContext context) {
                         radius: 40,
                         child: ClipOval(
                           child: Image.network(
-                            "https://school-monitor-backend.herokuapp.com/api/student/image/" +
+                            "http://school-monitor.goveratech.com/api/student/image/" +
                                 authController.studentData.value.id,
                             fit: BoxFit.cover,
                             width: 90.0,
@@ -77,7 +79,10 @@ Widget drawer(BuildContext context) {
                   ),
                 ),
               ),
-              // renderDrawerItem(context, Icons.lock, "Change Password"),
+              renderDrawerItem(context, Icons.lock, "Change Password",
+                  action: () {
+                Get.to(() => ChangePassword());
+              }),
               renderDrawerItem(context, Icons.check_box, "Terms of Use"),
               renderDrawerItem(context, Icons.person, "Privacy Policy"),
               renderDrawerItem(context, Icons.help, "Help"),
@@ -125,7 +130,9 @@ Widget drawer(BuildContext context) {
                     ),
                     Center(
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Get.offAll(Login());
+                        },
                         child: Text(
                           appLogout,
                           style: GoogleFonts.poppins(

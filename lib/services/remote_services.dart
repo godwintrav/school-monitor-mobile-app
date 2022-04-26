@@ -21,7 +21,7 @@ class RemoteServices {
       "Accept": "application/json"
     };
     var response = await client.post(
-      "https://school-monitor-backend.herokuapp.com/api/student/login",
+      "https://school-monitor.goveratech.com/api/student/login",
       headers: header,
       body: jsonEncode(data),
     );
@@ -35,6 +35,27 @@ class RemoteServices {
     }
   }
 
+  static Future<int> changeUserPassword(
+      String oldPassword, String newPassword, String id, String token) async {
+    Map<String, dynamic> data = {
+      "oldPassword": oldPassword,
+      "newPassword": newPassword
+    };
+    Map<String, String> header = {
+      "Content-type": "application/json",
+      "Accept": "application/json",
+      "Authorization": token,
+    };
+    var response = await client.post(
+      "https://school-monitor.goveratech.com/api/student/password/" + id,
+      headers: header,
+      body: jsonEncode(data),
+    );
+    print(response.body);
+
+    return response.statusCode;
+  }
+
   static Future<Student> fetchStudent(String id, String token) async {
     Map<String, String> header = {
       "Authorization": token,
@@ -42,7 +63,7 @@ class RemoteServices {
       "Accept": "application/json"
     };
     var response = await client.get(
-        "https://school-monitor-backend.herokuapp.com/api/student/" + id,
+        "https://school-monitor.goveratech.com/api/student/" + id,
         headers: header);
     if (response.statusCode == 200) {
       var jsonString = response.body;
@@ -59,7 +80,7 @@ class RemoteServices {
       "Accept": "application/json"
     };
     var response = await client.get(
-        "https://school-monitor-backend.herokuapp.com/api/teacher",
+        "https://school-monitor.goveratech.com/api/teacher",
         headers: header);
     if (response.statusCode == 200) {
       var jsonString = response.body;
@@ -77,7 +98,7 @@ class RemoteServices {
       "Accept": "application/json"
     };
     var response = await client.get(
-        "https://school-monitor-backend.herokuapp.com/api/grade/student/" + id,
+        "https://school-monitor.goveratech.com/api/grade/student/" + id,
         headers: header);
     if (response.statusCode == 200) {
       var jsonString = response.body;
@@ -94,7 +115,7 @@ class RemoteServices {
       "Accept": "application/json"
     };
     var response = await client.get(
-        "https://school-monitor-backend.herokuapp.com/api/event",
+        "https://school-monitor.goveratech.com/api/event",
         headers: header);
     if (response.statusCode == 200) {
       var jsonString = response.body;
@@ -111,7 +132,7 @@ class RemoteServices {
       "Accept": "application/json"
     };
     var response = await client.get(
-        "https://school-monitor-backend.herokuapp.com/api/attendance/" + id,
+        "https://school-monitor.goveratech.com/api/attendance/" + id,
         headers: header);
     if (response.statusCode == 200) {
       var jsonString = response.body;

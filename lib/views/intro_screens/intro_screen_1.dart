@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:skool_trust/utils/convert_mediaQuery.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:skool_trust/views/auth_screens/login.dart';
 import 'package:skool_trust/views/auth_screens/school_code.dart';
 
 class IntroScreen1 extends StatelessWidget {
@@ -51,7 +52,7 @@ class IntroScreen1 extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "SkoolComm",
+                        "School Monitor",
                         style: GoogleFonts.poppins(
                             color: Colors.black,
                             fontWeight: FontWeight.w700,
@@ -114,7 +115,7 @@ class IntroScreen1 extends StatelessWidget {
                   children: [
                     TextButton(
                       onPressed: () {
-                        Get.off(() => SchoolCode());
+                        Get.off(() => Login());
                       },
                       child: Text(
                         "SKIP",

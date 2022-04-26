@@ -6,12 +6,7 @@ import 'package:skool_trust/utils/appColors.dart';
 import 'package:skool_trust/utils/convert_mediaQuery.dart';
 import 'package:skool_trust/views/home/home.dart';
 
-class Login extends StatefulWidget {
-  @override
-  _LoginState createState() => _LoginState();
-}
-
-class _LoginState extends State<Login> {
+class ChangePassword extends StatelessWidget {
   final AuthController authController = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
@@ -64,7 +59,7 @@ class _LoginState extends State<Login> {
                     child: new Column(
                       children: <Widget>[
                         Text(
-                          'Fill in your username and password to access your school portal account',
+                          'UPDATE PASSWORD',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.poppins(
                               fontWeight: FontWeight.w300,
@@ -83,68 +78,7 @@ class _LoginState extends State<Login> {
                     alignment: Alignment.centerLeft,
                     child: RichText(
                       text: TextSpan(
-                          text: 'EMAIL',
-                          style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black,
-                              fontSize: ConvertToMediaQuery()
-                                  .convertFontSizeToMediaQuery(12, context)),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: ' *',
-                              style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.red,
-                                  fontSize: ConvertToMediaQuery()
-                                      .convertFontSizeToMediaQuery(
-                                          12, context)),
-                            )
-                          ]),
-                    ),
-                  ),
-                  SizedBox(
-                    height: ConvertToMediaQuery()
-                        .convertHeightToMediaQuery(5, context),
-                  ),
-                  Container(
-                    height: ConvertToMediaQuery()
-                        .convertHeightToMediaQuery(35, context),
-                    child: TextField(
-                      style: TextStyle(color: Colors.black),
-                      controller: authController.emailController,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        contentPadding:
-                            EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: BorderSide(
-                                width: 1.2,
-                                color: AppColors().textFieldBorderColor)),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: BorderSide(
-                                width: 1.2,
-                                color: AppColors().textFieldBorderColor)),
-                        hintText: "ENTER EMAIL",
-                        hintStyle: GoogleFonts.poppins(
-                            fontWeight: FontWeight.w400,
-                            color: Color(0xFF535353),
-                            fontSize: ConvertToMediaQuery()
-                                .convertFontSizeToMediaQuery(12, context)),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: ConvertToMediaQuery()
-                        .convertHeightToMediaQuery(15, context),
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: RichText(
-                      text: TextSpan(
-                          text: 'PASSWORD',
+                          text: 'OLD PASSWORD',
                           style: GoogleFonts.poppins(
                               fontWeight: FontWeight.w700,
                               color: Colors.black,
@@ -173,6 +107,67 @@ class _LoginState extends State<Login> {
                     child: TextField(
                       style: TextStyle(color: Colors.black),
                       controller: authController.passwordController,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                                width: 1.2,
+                                color: AppColors().textFieldBorderColor)),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                                width: 1.2,
+                                color: AppColors().textFieldBorderColor)),
+                        hintText: "Enter your old password".toUpperCase(),
+                        hintStyle: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w400,
+                            color: Color(0xFF535353),
+                            fontSize: ConvertToMediaQuery()
+                                .convertFontSizeToMediaQuery(12, context)),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: ConvertToMediaQuery()
+                        .convertHeightToMediaQuery(15, context),
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: RichText(
+                      text: TextSpan(
+                          text: 'NEW PASSWORD',
+                          style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w700,
+                              color: Colors.black,
+                              fontSize: ConvertToMediaQuery()
+                                  .convertFontSizeToMediaQuery(12, context)),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: ' *',
+                              style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.red,
+                                  fontSize: ConvertToMediaQuery()
+                                      .convertFontSizeToMediaQuery(
+                                          12, context)),
+                            )
+                          ]),
+                    ),
+                  ),
+                  SizedBox(
+                    height: ConvertToMediaQuery()
+                        .convertHeightToMediaQuery(5, context),
+                  ),
+                  Container(
+                    height: ConvertToMediaQuery()
+                        .convertHeightToMediaQuery(35, context),
+                    child: TextField(
+                      style: TextStyle(color: Colors.black),
+                      controller: authController.newpasswordController,
                       obscureText: true,
                       decoration: InputDecoration(
                         filled: true,
@@ -189,7 +184,69 @@ class _LoginState extends State<Login> {
                             borderSide: BorderSide(
                                 width: 1.2,
                                 color: AppColors().textFieldBorderColor)),
-                        hintText: "ENTER PASSWORD",
+                        hintText: "ENTER YOU NEW PASSWORD",
+                        hintStyle: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w400,
+                            color: Color(0xFF535353),
+                            fontSize: ConvertToMediaQuery()
+                                .convertFontSizeToMediaQuery(12, context)),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: ConvertToMediaQuery()
+                        .convertHeightToMediaQuery(15, context),
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: RichText(
+                      text: TextSpan(
+                          text: 'CONFIRM NEW PASSWORD',
+                          style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w700,
+                              color: Colors.black,
+                              fontSize: ConvertToMediaQuery()
+                                  .convertFontSizeToMediaQuery(12, context)),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: ' *',
+                              style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.red,
+                                  fontSize: ConvertToMediaQuery()
+                                      .convertFontSizeToMediaQuery(
+                                          12, context)),
+                            )
+                          ]),
+                    ),
+                  ),
+                  SizedBox(
+                    height: ConvertToMediaQuery()
+                        .convertHeightToMediaQuery(5, context),
+                  ),
+                  Container(
+                    height: ConvertToMediaQuery()
+                        .convertHeightToMediaQuery(35, context),
+                    child: TextField(
+                      style: TextStyle(color: Colors.black),
+                      controller: authController.confirmpasswordController,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                                width: 1.2,
+                                color: AppColors().textFieldBorderColor)),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                                width: 1.2,
+                                color: AppColors().textFieldBorderColor)),
+                        hintText: "CONFIRM YOUR NEW PASSWORD",
                         hintStyle: GoogleFonts.poppins(
                             fontWeight: FontWeight.w400,
                             color: Color(0xFF535353),
@@ -212,26 +269,11 @@ class _LoginState extends State<Login> {
                         width: MediaQuery.of(context).size.width * 0.8,
                         child: TextButton(
                             onPressed: () async {
-                              var result = await authController.loginUser();
-                              if (result) {
-                                Get.to(() => Home());
-                              } else {
-                                Get.snackbar(
-                                  "Login Error",
-                                  "Incorrect Email or Password",
-                                  icon: Icon(Icons.person, color: Colors.white),
-                                  snackPosition: SnackPosition.BOTTOM,
-                                  backgroundColor: Colors.red,
-                                  borderRadius: 20,
-                                  margin: EdgeInsets.all(15),
-                                  colorText: Colors.white,
-                                  duration: Duration(seconds: 4),
-                                  isDismissible: true,
-                                  dismissDirection:
-                                      SnackDismissDirection.HORIZONTAL,
-                                  forwardAnimationCurve: Curves.easeOutBack,
-                                );
-                              }
+                              var result =
+                                  await authController.changeUserPassword();
+                              // if (result) {
+                              //   Get.to(() => Home());
+                              // }
                             },
                             style: TextButton.styleFrom(
                                 shape: RoundedRectangleBorder(
@@ -239,7 +281,7 @@ class _LoginState extends State<Login> {
                                 backgroundColor: Color(0xFF0081D5),
                                 padding: EdgeInsets.symmetric(horizontal: 0)),
                             child: Text(
-                              'LOGIN',
+                              'UPDATE PASSWORD',
                               style: GoogleFonts.poppins(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w600,
@@ -256,7 +298,9 @@ class _LoginState extends State<Login> {
                   Container(
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(() => Home());
+                        },
                         style: TextButton.styleFrom(
                           shape: RoundedRectangleBorder(
                               side: BorderSide(
@@ -265,7 +309,7 @@ class _LoginState extends State<Login> {
                           primary: Colors.white,
                         ),
                         child: Text(
-                          'BACK',
+                          'BACK TO HOME SCREEN',
                           style: GoogleFonts.poppins(
                               color: Color(0xFF0081D5),
                               fontWeight: FontWeight.w600,
@@ -276,15 +320,6 @@ class _LoginState extends State<Login> {
                   SizedBox(
                     height: ConvertToMediaQuery()
                         .convertHeightToMediaQuery(10, context),
-                  ),
-                  Text(
-                    'Trouble Signing in? Contact your school admin',
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w300,
-                        color: Color(0xFFFF0000),
-                        fontSize: ConvertToMediaQuery()
-                            .convertFontSizeToMediaQuery(10, context)),
                   ),
                 ],
               ),

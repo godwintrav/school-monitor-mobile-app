@@ -4,6 +4,8 @@ import 'package:skool_trust/controllers/attendanceController.dart';
 import 'package:skool_trust/utils/appColors.dart';
 import 'package:skool_trust/utils/appStyles.dart';
 import 'package:skool_trust/utils/convert_mediaQuery.dart';
+import 'package:skool_trust/views/attendance/absentAttendance.dart';
+import 'package:skool_trust/views/attendance/attendedAttendance.dart';
 import 'package:skool_trust/widgets/StudentInfo.dart';
 import 'package:skool_trust/widgets/drawer.dart';
 import 'package:skool_trust/utils/appBar.Dart';
@@ -80,92 +82,116 @@ class Attendance extends StatelessWidget {
                   height: ConvertToMediaQuery()
                       .convertHeightToMediaQuery(20, context),
                 ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-                  height: ConvertToMediaQuery()
-                      .convertHeightToMediaQuery(50, context),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: Colors.transparent)),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "DAYS PRESENT",
-                        style: textStyleBlue(
-                          context,
-                          fontSize: 14,
-                          fw: FontWeight.bold,
-                        ),
-                      ),
-                      Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.greenAccent,
-                          borderRadius: BorderRadius.circular(3),
-                        ),
-                        child: Center(
-                          child: Text(
-                            attendanceController
-                                .attendanceData.value.attended.length
-                                .toString(),
-                            style: textStyleBlue(
-                              context,
-                              fontSize: 14,
-                              fw: FontWeight.bold,
-                            ),
+                InkWell(
+                  onTap: () {
+                    if (attendanceController
+                            .attendanceData.value.attended.length >
+                        0) {
+                      Get.to(() => AttendedPage(
+                            attendedList: attendanceController
+                                .attendanceData.value.attended,
+                          ));
+                    }
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    height: ConvertToMediaQuery()
+                        .convertHeightToMediaQuery(50, context),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.transparent)),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "DAYS PRESENT",
+                          style: textStyleBlue(
+                            context,
+                            fontSize: 14,
+                            fw: FontWeight.bold,
                           ),
                         ),
-                      )
-                    ],
+                        Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            color: Colors.greenAccent,
+                            borderRadius: BorderRadius.circular(3),
+                          ),
+                          child: Center(
+                            child: Text(
+                              attendanceController
+                                  .attendanceData.value.attended.length
+                                  .toString(),
+                              style: textStyleBlue(
+                                context,
+                                fontSize: 14,
+                                fw: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(
                   height: ConvertToMediaQuery()
                       .convertHeightToMediaQuery(20, context),
                 ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-                  height: ConvertToMediaQuery()
-                      .convertHeightToMediaQuery(50, context),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: Colors.transparent)),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "DAYS ABSENT",
-                        style: textStyleBlue(
-                          context,
-                          fontSize: 14,
-                          fw: FontWeight.bold,
-                        ),
-                      ),
-                      Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: Color(0XFFFFB9B9),
-                          borderRadius: BorderRadius.circular(3),
-                        ),
-                        child: Center(
-                          child: Text(
-                            attendanceController
-                                .attendanceData.value.absent.length
-                                .toString(),
-                            style: textStyleBlue(
-                              context,
-                              fontSize: 14,
-                              fw: FontWeight.bold,
-                            ),
+                InkWell(
+                  onTap: () {
+                    if (attendanceController
+                            .attendanceData.value.absent.length >
+                        0) {
+                      Get.to(() => AbsentPage(
+                            absentList: attendanceController
+                                .attendanceData.value.absent,
+                          ));
+                    }
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    height: ConvertToMediaQuery()
+                        .convertHeightToMediaQuery(50, context),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.transparent)),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "DAYS ABSENT",
+                          style: textStyleBlue(
+                            context,
+                            fontSize: 14,
+                            fw: FontWeight.bold,
                           ),
                         ),
-                      )
-                    ],
+                        Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            color: Color(0XFFFFB9B9),
+                            borderRadius: BorderRadius.circular(3),
+                          ),
+                          child: Center(
+                            child: Text(
+                              attendanceController
+                                  .attendanceData.value.absent.length
+                                  .toString(),
+                              style: textStyleBlue(
+                                context,
+                                fontSize: 14,
+                                fw: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],

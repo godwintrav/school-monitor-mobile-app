@@ -6,7 +6,7 @@ import 'package:skool_trust/services/remote_services.dart';
 
 class AttendanceController extends GetxController {
   final AuthController authController = Get.find<AuthController>();
-  final attendanceData = Attendance().obs;
+  var attendanceData = Attendance().obs;
   var isLoading = true.obs;
 
   @override
